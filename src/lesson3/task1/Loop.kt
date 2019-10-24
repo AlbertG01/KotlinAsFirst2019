@@ -2,6 +2,9 @@
 
 package lesson3.task1
 
+import lesson1.task1.sqr
+import kotlin.math.abs
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 /**
@@ -67,7 +70,16 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
+fun digitNumber(n: Int): Int {
+    var t = n
+    var l = 0
+    do {
+        t /= 10
+        l++
+    } while (abs(t) > 0)
+    return l
+}
+
 
 /**
  * Простая
@@ -75,7 +87,18 @@ fun digitNumber(n: Int): Int = TODO()
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int {
+    if (n in 1..2) return  1
+    var x1 = 1
+    var x2 = 1
+    var x0 = 0
+    for (i in 3..n) {
+        x0 = x1 + x2
+        x1 = x2
+        x2 = x0
+    }
+    return x0
+}
 
 /**
  * Простая
@@ -196,7 +219,17 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var t = 0
+    var g = 0
+    for (i in 1..n) {
+        t += digitNumber(sqr(i))
+        g = i
+        if (t >= n) break
+    }
+    return if (t == n) sqr(g) % 10
+    else (sqr(g) / 10.0.pow(t - n).toInt()) % 10
+}
 
 /**
  * Сложная
@@ -207,4 +240,14 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var t = 0
+    var g = 0
+    for (i in 1..n) {
+        t += digitNumber(fib(i))
+        g = i
+        if (t >= n) break
+    }
+    return if (t == n) fib(g) % 10
+    else (fib(g) / 10.0.pow(t - n).toInt()) % 10
+}
