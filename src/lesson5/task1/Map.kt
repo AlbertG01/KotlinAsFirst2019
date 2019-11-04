@@ -212,7 +212,11 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
  * Например:
  *   canBuildFrom(listOf('a', 'b', 'o'), "baobab") -> true
  */
-fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
+fun canBuildFrom(chars: List<Char>, word: String): Boolean {
+    var l = 0
+    word.map { if (it.toLowerCase() in chars) l++ }
+    return l == word.length
+}
 
 /**
  * Средняя
@@ -226,7 +230,11 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
  * Например:
  *   extractRepeats(listOf("a", "b", "a")) -> mapOf("a" to 2)
  */
-fun extractRepeats(list: List<String>): Map<String, Int> = TODO()
+fun extractRepeats(list: List<String>): Map<String, Int> {
+    val map = mutableMapOf<String, Int>()
+    list.map { if (it in map.keys) map[it] = map[it]!!.plus(1) else map += it to 1 }
+    return map.filterValues { it > 1 }
+}
 
 /**
  * Средняя
@@ -237,7 +245,14 @@ fun extractRepeats(list: List<String>): Map<String, Int> = TODO()
  * Например:
  *   hasAnagrams(listOf("тор", "свет", "рот")) -> true
  */
-fun hasAnagrams(words: List<String>): Boolean = TODO()
+fun hasAnagrams(words: List<String>): Boolean {
+    val anagrams = mutableListOf<List<Char>>()
+    for (i in 0 until words.size) {
+        if (words[i].toList().sorted()in anagrams) return true
+        else anagrams += words[i].toList().sorted()
+    }
+    return false
+}
 
 /**
  * Сложная
@@ -282,7 +297,24 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
+val numbers = IntArray(number + 1) { -1 }
+    if ((number % 2 == 0) && (number / 2 in list)){
+        val pair = mutableListOf<Int>()
+        for (i in 0 until list.size) {
+            if (list[i] == number / 2) pair += i
+        }
+        if (pair.size > 1) return Pair(pair[0], pair[1])
+    }
+    for (i in 0 until number + 1) {
+        if (i in list) numbers [i] = list.indexOf(i)
+    }
+    for (i in 0 until number) {
+        if ((numbers[i] != -1) && (numbers[number - i] != -1) && (numbers[i] != numbers[number - i]))
+           return Pair(minOf(numbers[i], numbers[number - i]), maxOf(numbers[i], numbers [number - i]))
+    }
+    return Pair(-1, -1)
+}
 
 /**
  * Очень сложная
