@@ -1,4 +1,4 @@
-  @file:Suppress("UNUSED_PARAMETER", "ConvertCallChainIntoSequence")
+@file:Suppress("UNUSED_PARAMETER", "ConvertCallChainIntoSequence")
 
 package lesson4.task1
 
@@ -117,7 +117,7 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
-fun abs(v: List<Double>): Double = sqrt((v.map { it * it } ).sum())
+fun abs(v: List<Double>): Double = sqrt((v.map { it * it }).sum())
 
 /**
  * Простая
@@ -224,7 +224,7 @@ fun factorize(n: Int): List<Int> {
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = factorize(n).joinToString (separator = "*")
+fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
 
 /**
  * Средняя
@@ -259,7 +259,7 @@ fun convertToString(n: Int, base: Int): String {
     val list = convert(n, base)
     var num = ""
     list.map {
-        if (it > 9) num += (((it + 87). toByte()).toChar()) else num += it.toString()
+        if (it > 9) num += (((it + 87).toByte()).toChar()) else num += it.toString()
     }
     return num
 }
@@ -326,35 +326,35 @@ fun russian(n: Int): String {
         list.add(unitsS[n % 10])
     }
     list.removeIf { it.isEmpty() }
-    return list.joinToString ("")
+    return list.joinToString("")
 }
 
-  val hundreds = arrayOf(
-      "", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот"
-  )
+val hundreds = arrayOf(
+    "", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот"
+)
 
-  val tens = arrayOf(
-      "", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто"
-  )
+val tens = arrayOf(
+    "", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто"
+)
 
-  val theSecondTen = arrayOf(
-      "", "одинадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадццать", "шестнадцать", "семнадцать",
-      "восемнадцать", "девятнадцать"
-  )
+val theSecondTen = arrayOf(
+    "", "одинадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадццать", "шестнадцать", "семнадцать",
+    "восемнадцать", "девятнадцать"
+)
 
-  fun thousands(n: Int): String {
-      if (n / 1000 % 100 in 11..14) return "тысяч"
-      return when (n / 1000 % 10) {
-          1 -> "тысяча"
-          in 2..4 -> "тысячи"
-          else -> "тысяч"
-      }
-  }
+fun thousands(n: Int): String {
+    if (n / 1000 % 100 in 11..14) return "тысяч"
+    return when (n / 1000 % 10) {
+        1 -> "тысяча"
+        in 2..4 -> "тысячи"
+        else -> "тысяч"
+    }
+}
 
-  val unitsF = arrayOf(
-      "", "одна", "две", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"
-  )
+val unitsF = arrayOf(
+    "", "одна", "две", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"
+)
 
-  val unitsS = arrayOf(
-      "", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"
-  )
+val unitsS = arrayOf(
+    "", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"
+)

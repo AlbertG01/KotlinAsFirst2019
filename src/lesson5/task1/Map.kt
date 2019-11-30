@@ -313,7 +313,7 @@ val numbers = IntArray(number + 1) { -1 }
         if ((numbers[i] != -1) && (numbers[number - i] != -1) && (numbers[i] != numbers[number - i]))
            return Pair(minOf(numbers[i], numbers[number - i]), maxOf(numbers[i], numbers [number - i]))
     }
-    return Pair(-1, -1) 
+    return Pair(-1, -1)
 }
 
 /**
