@@ -184,10 +184,10 @@ fun polynom(p: List<Int>, x: Int): Int {
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun accumulate(list: MutableList<Int>): MutableList<Int> {
-    var sum = 0
-    for (i in list.indices) {
-        list[i] += sum
-        sum = list[i]
+    var c = 0
+    for (i in 0 until list.size) {
+        list[i] += c
+        c = list[i]
     }
     return list
 }
@@ -257,11 +257,12 @@ fun convert(n: Int, base: Int): List<Int> {
  */
 fun convertToString(n: Int, base: Int): String {
     val list = convert(n, base)
-    var num = ""
-    list.map {
-        if (it > 9) num += (((it + 87).toByte()).toChar()) else num += it.toString()
+    var num = mutableListOf<Char>()
+    for (i in 0 until list.size) {
+        num += if (list[i] > 9) 'a' + list[i] - 10
+        else ('0' + list[i])
     }
-    return num
+    return num.joinToString(separator = "")
 }
 
 /**
